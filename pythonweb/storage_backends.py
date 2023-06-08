@@ -10,7 +10,7 @@ class StaticStorage(S3Boto3Storage):
         with SpooledTemporaryFile() as content_autoclose:
 
             content_autoclose.write(content.read())
-            return super(CustomS3Boto3Storage, self)._save(name, content_autoclose)
+            return super(StaticStorage, self)._save(name, content_autoclose)
 
 
 class PublicMediaStorage(S3Boto3Storage):
@@ -21,7 +21,7 @@ class PublicMediaStorage(S3Boto3Storage):
         with SpooledTemporaryFile() as content_autoclose:
 
             content_autoclose.write(content.read())
-            return super(CustomS3Boto3Storage, self)._save(name, content_autoclose)
+            return super(PublicMediaStorage, self)._save(name, content_autoclose)
 
 
 class PrivateMediaStorage(S3Boto3Storage):
@@ -33,4 +33,4 @@ class PrivateMediaStorage(S3Boto3Storage):
         with SpooledTemporaryFile() as content_autoclose:
 
             content_autoclose.write(content.read())
-            return super(CustomS3Boto3Storage, self)._save(name, content_autoclose)
+            return super(PrivateMediaStorage, self)._save(name, content_autoclose)
