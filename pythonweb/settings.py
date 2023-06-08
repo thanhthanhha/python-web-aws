@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-vl%-vph7dtwqmh$^&&1()2zoaur%i@!%okdw^#4z--qkl@g((^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -125,8 +125,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 # aws settings
 USE_S3 = os.getenv('USE_S3') == 'TRUE'
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 if USE_S3:
     print("use s3 work")
@@ -159,7 +157,7 @@ else:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CRISPY_TEMPLATE_PACK = 'Bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 LOGIN_REDIRECT_URL = 'blog-home'
