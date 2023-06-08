@@ -125,7 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 # aws settings
 USE_S3 = os.getenv('USE_S3') == 'TRUE'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 if USE_S3:
     print("use s3 work")
