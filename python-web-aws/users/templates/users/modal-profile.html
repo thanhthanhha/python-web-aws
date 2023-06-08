@@ -1,0 +1,29 @@
+{% load crispy_forms_tags %}
+  <!-- Modal User Profile-->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="profileModalLabel">Profile Info</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                {% if user.profile.image %}
+                    <img src="{{ user.profile.image.url }}" alt="Profile picture" class="img-thumbnail rounded-circle mx-auto d-block" style="max-width: 150px;" id="profile-picture">
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data" id="form1">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ user_form|crispy }}
+                        {{ profile_form|crispy }}
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="form1">Save changes</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#passwordModal" data-dismiss="modal">Change Password</button>
+            </div>
+          </div>
+        </div>
+      </div>

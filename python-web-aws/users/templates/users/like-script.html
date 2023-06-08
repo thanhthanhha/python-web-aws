@@ -1,0 +1,62 @@
+{% block javascript-like %}
+<script>
+   (function($) {
+
+    // $(document).ready(function() {
+    //     console.log(" working");
+    //     $('.like-button').on('click', function() {
+    //         console.log("work till here");
+    //         var host = window.location.host;
+    //         var postElement = $(this).closest('.work-item');
+	// 	  	var postPK = postElement.data('post-pk');
+
+    //         console.log(" in shitty function");
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: "{% url 'like_post' %}",
+    //             data: {
+    //                 csrfmiddlewaretoken: "{% csrf_token %}",
+    //                 post_id: postPK,
+    //                 user_id: "{{ local_user.id }}"
+    //             },
+    //             success: function (response) {
+    //                 console.log(response)
+    //             },
+    //             error: function (xhr, status, error) {
+    //                 console.log('Error like post:', error)
+    //             }
+    //         });
+
+	// 		$(this).toggleClass("far fa")	;
+	//     })
+    // })
+
+    // $(document).on("click",".like-button", function() {
+    //         console.log("work till here");
+    //         var host = window.location.host;
+    //         var postElement = $(this).closest('.work-item');
+	// 	  	var postPK = postElement.data('post-pk');
+
+    //         console.log(" in shitty function");
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: "{% url 'like_post' %}",
+    //             data: {
+    //                 csrfmiddlewaretoken: "{% csrf_token %}",
+    //                 post_id: postPK,
+    //                 user_id: "{{ local_user.id }}"
+    //             },
+    //             success: function (response) {
+    //                 console.log(response)
+    //             },
+    //             error: function (xhr, status, error) {
+    //                 console.log('Error like post:', error)
+    //             }
+    //         });
+
+	// 		$(this).toggleClass("far fa")	;
+	//     })
+   })(jQuery);
+    
+</script>
+{% endblock javascript-like %}

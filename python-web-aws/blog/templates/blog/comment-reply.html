@@ -1,0 +1,55 @@
+{% load humanize %}
+{% block comment_reply %}
+{% for comment in comments %}
+    <div class="commented-section mt-2">
+        <div class="d-flex flex-row align-items-center commented-user">
+            <h5 class="mr-2">{{ comment.user.username }}</h5>
+            <span class="dot mb-1"></span>
+            <span class="mb-1 ml-2">{{ comment.created_date|timesince }} ago</span>
+        </div>
+        <div class="comment-text-sm">
+            <span>{{ comment.content }}</span>
+        </div>
+        <div class="reply-section " data-post-pk="{{ comment.id }}">
+            <div class="d-flex flex-row align-items-center voting-icons">
+                {% block interactioncmt %}
+					{% include 'blog/interaction-cmt.html' with post_user=comment.like_users post_count=comment.cmt_like_count %}
+				{% endblock %}
+                <span class="dot ml-2"></span>
+                <h6 class="ml-2 mt-1 reply-button">Reply</h6>
+            </div>
+        </div>
+    </div>
+    {% for reply in comment.all_replies %}
+        <div class="commented-section mt-2 ml-4">
+            <div class="d-flex flex-row align-items-center commented-user">
+                <h6 class="mr-2">{{ reply.user.username }}</h6>
+                <div class="reply-icon">
+                <i class="fas fa-play"></i>
+                </div>
+                <h6>{{ reply.reply.user.username }}</h6>
+                <span class="dot mb-1"></span>
+                <span class="mb-1 ml-2">{{ reply.created_date|timesince }} ago</span></div>
+            <div class="comment-text-sm">
+                <span>{{ reply.content }}</span>
+            </div>
+            <div class="reply-section" data-post-pk="{{ reply.id }}">
+                <div class="d-flex flex-row align-items-center voting-icons">
+                    {% block interactionreply %}
+					    {% include 'blog/interaction-cmt.html' with post_user=reply.like_users post_count=reply.likes_count %}
+				    {% endblock %}
+                    <h6 class="ml-2 mt-1 reply-button">Reply</h6>
+                </div>
+            </div>
+        </div>
+        <div class="comment-toggle">
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4 ml-4" data-token="{{ csrf_token }}"">
+                <form class="commentForm" id="replyForm">
+                    <input type="text" class="form-control mr-3" placeholder="Add comment">
+                </form>
+                <button class="btn btn-primary comment-btn button" type="submit" form="replyForm" ><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% endblock %}

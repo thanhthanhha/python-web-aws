@@ -1,0 +1,123 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Profile</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" href="{{ MEDIA_URL }}icon.png" >
+		<link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+		<link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+		<link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="{% static 'css/main-profile.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+		{% block navbar %}
+			{% include 'blog/base-nav.html' %}
+		{% endblock %}
+
+		<!-- Modal -->
+		<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h4 class="modal-title" id="profileModalLabel">Profile Info</h4>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					{% if user.profile.image %}
+						<img src="{{ user.profile.image.url }}" alt="Profile picture" class="img-thumbnail rounded-circle mx-auto d-block" style="max-width: 150px;" id="profile-picture">
+					{% endif %}
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="#" class="image avatar" data-toggle="modal" data-target="#profileModal"><img src="{{ user.profile.image.url }}" alt="" /></a>
+					<div id="username"><h3>{{ user.username }}</h3></div>
+					<div id="username"><h1>{{ user.profile.job }}</h1></div>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>{{ user.profile.short_bio }}</h2>
+						</header>
+						<p>{{ user.profile.long_bio }}</p>
+					</section>
+
+				<!-- Two -->
+					<section id="two">
+						<h2>Recent Work</h2>
+						<div class="row">
+							{% for post in posts %}
+								<article class="col-6 col-12-xsmall work-item" data-post-pk="{{ post.pk }}">
+									<div class="thumb-wrapper position-relative">
+										<a href="{{ post.image.url }}" class="image fit thumb hide-after">
+											<img src="{{ post.image_thumbnail.url }}" alt="" />
+										</a>
+									</div>
+									<h3>{{ post.title }}</h3>
+									<p>{{ post.content }}</p>
+
+									{% block interactionbar %}
+										{% include 'blog/interaction-bar.html' %}
+									{% endblock %}
+								</article>
+								
+							{% endfor %}
+							
+						</div>
+					</section>
+
+				</div>
+			</div>
+
+		
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.poptrox.min.js' %}"></script>
+			<script src="{% static 'js/browser.min.js' %}"></script>
+			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+			<script src="{% static 'js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+			<script src="{% static 'js/main-profile.js' %}"></script>
+			{% block javascript-like %}
+			{% include 'users/like-script.html' %}
+				{% endblock javascript-like %}
+
+
+	</body>
+</html>
