@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from pythonweb.storage_backends import PublicMediaStorage, PrivateMediaStorage
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='post_pic')
+    image = models.ImageField(default='default.jpg', upload_to='post_pic', storage=PublicMediaStorage())
     image_thumbnail = ImageSpecField(source='image',
                                      processors=[ResizeToFill(200, 200)],
                                      format='JPEG',

@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from blog.data_helper.helper import Tree
 from django.urls import reverse
 
+
 # Create your views here.
 def home(request):
     top_user = get_object_or_404(User, username="Borsoi")
