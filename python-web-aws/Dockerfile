@@ -11,6 +11,8 @@ WORKDIR /usr/src/app
 RUN apk update \
     && apk add --virtual build-deps gcc python3-dev musl-dev \
     && apk add bash postgresql-dev \
+    && apk add libpq-dev \
+    && apk add python3-dev \
     && apk del build-deps
 
 # install python dependencies
