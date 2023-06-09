@@ -2,9 +2,10 @@ version: '3.8'
 
 services:
   web:
-    build: ./python-web-aws
-    args:
-        - BUILD_PROGRESS=plain
+    build: 
+      context: ./python-web-aws
+      args:
+          - BUILD_PROGRESS=plain
     command: bash -c 'gunicorn pythonweb.wsgi:application --bind 0.0.0.0:8000'
     volumes:
       - ./python-web-aws/:/usr/src/app/
