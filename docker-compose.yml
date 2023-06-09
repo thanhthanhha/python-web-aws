@@ -17,18 +17,25 @@ services:
       - ./python-web-aws/.env
     networks:
       - django_network
+      container_name: web
   nginx:
     build: ./nginx
     volumes:
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - web
+    environment:
+      - WEB_NAME=value
     networks:
       - django_network
 
 volumes:
   static_volume:
   media_volume:
+
+networks:
+  django_network:
+
