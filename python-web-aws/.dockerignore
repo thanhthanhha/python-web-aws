@@ -92,3 +92,6 @@ venv/
 
 # sqllite files
 db.sqlite3
+
+#Env file
+.env
