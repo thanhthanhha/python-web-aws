@@ -1,0 +1,126 @@
+<!-- Header -->
+	
+<div class="nav-bar">
+    <header id="header-nav">
+        <h1 id="page-title"><a href="{% url 'blog-home' %}">InstaBlog</a></h1>
+        <nav class="links">
+            <ul>
+                <li>
+                    {% if user.is_authenticated %}
+                        {% if local_user %}
+                            <a href="{% url 'users-profile' username=local_user.username%}">
+                                Your Profile
+                            </a>
+                        {% else %}
+                            <a href="{% url 'users-profile' username=user.username%}">
+                                Your Profile
+                            </a>
+                        {% endif %}
+                    {% else %}
+                    <a href="{% url 'signin' %}">
+                        <h3>Sign In</h3>
+                    </a>
+                    {% endif %}
+                </li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li><a href="{% url 'users-profile' username='Borsoi' %}">Top User</a></li>
+                <li><a href="{% url 'post-detail' pk=1 %}">Top Post</a></li>
+            </ul>
+        </nav>
+        <nav class="main">
+            <ul>
+                <li class="menu">
+                    <a class="fa-bars" href="#menu">Menu</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+<!-- Menu -->
+    <section id="menu">
+
+        <!-- Search -->
+							<section>
+								<form class="search" method="get" action="{% url 'search' %}">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+        <!-- Links -->
+            <section>
+                <ul class="links">  
+                    <li>
+                        {% if user.is_authenticated %}
+                            {% if local_user %}
+                                <a href="{% url 'users-profile' username=local_user.username%}">
+                                    <h3>{{ local_user.username }} Profile</h3>
+                                    <p>see your work</p>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'users-profile' username=user.username%}">
+                                    <h3>{{ user.username }} Profile</h3>
+                                    <p>see your work</p>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                        <a href="{% url 'signin' %}">
+                            <h3>Sign In for your Account</h3>
+                            <p>Click on the link to Sign In</p>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'blog-home' %}">
+                            <h3>See Our Home</h3>
+                            <p>see others' work</p>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'users-signup' %}">
+                            <h3>Sign Up for your Account</h3>
+                            <p>Click on the link to Sign Up</p>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="{% url 'post-detail' pk=1 %}">
+                            <h3>Top Post</h3>
+                            <p>Phasellus sed ultricies mi congue</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users-profile' username='Borsoi' %}">
+                            <h3>Top User</h3>
+                            <p>Porta lectus amet ultricies</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+        <!-- Actions -->
+            <section>
+                <ul class="actions stacked">
+                    <li>
+                        {% if user.is_authenticated %}
+											<a href="{% url 'logout' %}" class="button medium fit">Log Out</a>
+						{% else %}
+											<a href="{% url 'signin' %}" class="button medium fit">Log In</a>
+						{% endif %}
+                    </li>
+                </ul>
+            </section>
+
+    </section>
+    <!--Message Block-->
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show custom-alert w-50 mx-auto" role="alert">
+            <button type="button" class="close custom-btn" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            {{message}}
+        </div>
+    {% endfor %}
+    {% endif %}
+</div>

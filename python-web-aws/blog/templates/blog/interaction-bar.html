@@ -1,0 +1,19 @@
+<!-- Interaction -->
+{% load extra_tag %}
+
+{% block interactionbar %}
+<div class="d-flex flex-row w-100 mt-4" data-token="{{ csrf_token }}" data-user="{{ local_user.id }}">
+        {% with post_like=likes|dictitem:post.id %}
+        <i class="text-center like-button w-50 border border border-top-0 border border-left-0 border border-bottom-0 interaction-bar">
+            <h3 style="display: inline;">{{ post_like|last }}</h3>
+        {% if local_user.pk in post_like  %}
+            <i class="fa fa-thumbs-up icon-tag"></i>
+        {% else %}
+            <i class="far fa-thumbs-up icon-tag"></i>
+        {% endif %}
+        </i>
+        {% endwith %}
+        <div class="fa fa-comment-dots text-center w-50 interaction-bar" onclick="location.href='{{ post.get_absolute_url }}';" style="cursor: pointer;"></div>
+</div>
+{% endblock %}
+

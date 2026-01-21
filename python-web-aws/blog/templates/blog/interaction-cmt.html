@@ -1,0 +1,14 @@
+{% load extra_tag %}
+
+{% block interactioncmt %}
+<div class="d-flex flex-row" data-token="{{ csrf_token }}" data-user="{{ local_user.id }}">
+        <i class="text-center like-button w-100 interaction-bar" style="font-size:0.8em;">
+            <h3 style="display: inline;">{{ post_count }}</h3>
+        {% if local_user.id in post_user  %}
+            <i class="fa fa-thumbs-up icon-tag"></i>
+        {% else %}
+            <i class="far fa-thumbs-up icon-tag"></i>
+        {% endif %}
+        </i>
+</div>
+{% endblock %}
