@@ -1,0 +1,1 @@
+resources:%0A%20%20-%20./web-deployment.yaml%0A%20%20-%20./nginx-deployment.yaml%0A%20%20-%20./redis-deployment.yaml%0A
